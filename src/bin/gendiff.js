@@ -11,7 +11,7 @@ export default commander
   .arguments('<firstConfig>')
   .arguments('<secondConfig>')
   .option('-f, --format [type]', 'Output format')
-  .action(function (firstConfig, secondConfig) {
+  .action((firstConfig, secondConfig) => {
     const first = fs.readFileSync(firstConfig).toString();
     const second = fs.readFileSync(secondConfig).toString();
     console.log(gendiff(first, second));
