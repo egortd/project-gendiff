@@ -1,6 +1,6 @@
 {
   "name": "gendiff-edu",
-  "version": "1.0.1",
+  "version": "1.0.6",
   "description": "the utility helps to find differences in configuration files",
   "main": "",
   "bin": {
@@ -36,6 +36,7 @@
     "jest-cli": "^24.7.1"
   },
   "dependencies": {
-    "commander": "^2.20.0"
+    "commander": "^2.20.0",
+    "lodash": "^4.17.11"
   }
 }
