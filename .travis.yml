@@ -9,11 +9,13 @@ node_js:
   - node
 
 before_script:
-  - npm install codeclimate-test-reporter -g
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script: 
   - make lint
   - make test-coverage
 
 after_script:
-  - codeclimate-test-reporter <./coverage/lcov.info
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
