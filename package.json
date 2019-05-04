@@ -1,6 +1,6 @@
 {
   "name": "gendiff-edu",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "the utility helps to find differences in configuration files",
   "main": "",
   "bin": {
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "commander": "^2.20.0",
+    "ini": "^1.3.5",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.11"
   }

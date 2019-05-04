@@ -23,4 +23,10 @@ describe('flat', () => {
     const received = gendiff(before, after);
     expect(received).toBe(expected);
   });
+  test('INI', () => {
+    const before = '__tests__/__fixtures__/before.ini';
+    const after = '__tests__/__fixtures__/after.ini';
+    const received = gendiff(before, after);
+    expect(received).toBe(expected);
+  });
 });
