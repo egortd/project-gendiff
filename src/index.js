@@ -1,10 +1,20 @@
 import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
+import { has } from 'lodash';
 
 export default (firstConfig, secondConfig) => {
-  const getObjectView = config => JSON.parse(fs.readFileSync(config, 'utf-8'));
+  const parse = {
+    '.json': JSON.parse,
+    '.yml': yaml.safeLoad,
+  };
+
+  const getExt = pathTo => path.extname(pathTo);
+  const getObjectView = config => parse[getExt(config)](fs.readFileSync(config));
   const first = getObjectView(firstConfig);
   const second = getObjectView(secondConfig);
   const properties = new Set([...Object.keys(first), ...Object.keys(second)]);
+
   const propertyAction = [
     {
       type: 'unchanged',
@@ -13,17 +23,17 @@ export default (firstConfig, secondConfig) => {
     },
     {
       type: 'deleted',
-      check: prop => !second[prop],
+      check: prop => has(first, prop) && !has(second, prop),
       view: prop => `  - ${prop}: ${first[prop]}`,
     },
     {
       type: 'added',
-      check: prop => !first[prop] && second[prop],
+      check: prop => !has(first, prop) && has(second, prop),
       view: prop => `  + ${prop}: ${second[prop]}`,
     },
     {
       type: 'changed',
-      check: prop => first[prop] !== second[prop],
+      check: prop => has(first, prop) && has(second, prop),
       view: prop => `  + ${prop}: ${second[prop]}\n  - ${prop}: ${first[prop]}`,
     },
   ];

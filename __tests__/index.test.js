@@ -1,9 +1,6 @@
 import gendiff from '../src';
 
-test('gendiff', () => {
-  const before = '__tests__/__fixtures__/before.json';
-  const after = '__tests__/__fixtures__/after.json';
-  const received = gendiff(before, after);
+describe('flat', () => {
   const expected = `{
     host: hexlet.io
   + timeout: 20
@@ -12,5 +9,18 @@ test('gendiff', () => {
   - follow: false
   + verbose: true
 }`;
-  expect(received).toBe(expected);
+  test('JSON', () => {
+    const before = '__tests__/__fixtures__/before.json';
+    const after = '__tests__/__fixtures__/after.json';
+    const received = gendiff(before, after);
+    // const pathToExpected = '__tests__/__fixtures__/diff.txt';
+    // const expected = fs.readFileSync(pathToExpected, 'utf-8');
+    expect(received).toBe(expected);
+  });
+  test('YAML', () => {
+    const before = '__tests__/__fixtures__/before.yml';
+    const after = '__tests__/__fixtures__/after.yml';
+    const received = gendiff(before, after);
+    expect(received).toBe(expected);
+  });
 });
