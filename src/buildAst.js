@@ -15,7 +15,7 @@ const getAst = (first, second) => {
     },
     {
       check: prop => !second[prop],
-      makeNode: prop => ({ type: 'deleted', prop, valueBefore: first[prop] }),
+      makeNode: prop => ({ type: 'removed', prop, valueBefore: first[prop] }),
     },
     {
       check: prop => first[prop] !== second[prop],
@@ -25,12 +25,9 @@ const getAst = (first, second) => {
     },
   ];
   const getPropertyAction = prop => propertyAction.find(({ check }) => check(prop));
-  const ast = [...properties].reduce(
-    (acc, prop) => {
-      const { makeNode } = getPropertyAction(prop);
-      return [...acc, makeNode(prop)];
-    }, [],
-  );
-  return ast;
+  return [...properties].map((prop) => {
+    const { makeNode } = getPropertyAction(prop);
+    return makeNode(prop);
+  });
 };
 export default getAst;

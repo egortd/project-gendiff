@@ -1,12 +1,12 @@
 import { flatten, isEmpty } from 'lodash';
 
-const getPlain = (ast, pathCall) => {
+const getPlain = (ast, pathCall = '') => {
   const getStringValue = item => (item instanceof Object ? '[complex value]' : `value '${item}'`);
   const typeActions = {
     children: ({ children }, chain) => getPlain(children, chain),
     unchanged: () => '',
     added: ({ valueAfter }, chain) => `Property '${chain}' was added with ${getStringValue(valueAfter)}`,
-    deleted: (node, chain) => `Property '${chain}' was deleted`,
+    removed: (node, chain) => `Property '${chain}' was removed`,
     changed: ({ valueBefore, valueAfter }, chain) => {
       const firstValue = getStringValue(valueBefore);
       const secondValue = getStringValue(valueAfter);

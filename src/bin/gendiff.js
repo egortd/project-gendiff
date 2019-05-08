@@ -9,8 +9,8 @@ export default commander
   .description('Compares two configuration files and shows a difference.')
   .arguments('<firstConfig>')
   .arguments('<secondConfig>')
-  .option('-f, --format [type]', 'Output format')
-  .action((firstConfig, secondConfig, option) => {
-    console.log(gendiff(firstConfig, secondConfig, option.format));
+  .option('-f, --format [type]', 'Output format', 'tree')
+  .action((firstConfig, secondConfig, options) => {
+    console.log(gendiff(firstConfig, secondConfig, options.format));
   })
   .parse(process.argv);
