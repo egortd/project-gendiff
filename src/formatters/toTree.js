@@ -2,9 +2,9 @@ import { flatten } from 'lodash';
 
 const getString = (ast, step = 1) => {
   const indentation = v => ' '.repeat(2 * v);
-  const stringify = (obj) => {
-    const keys = Object.keys(obj);
-    const string = keys.reduce((acc, key) => [...acc, `${indentation(step + 3)}${key}: ${obj[key]}`], []).join('\n');
+  const stringify = (item) => {
+    const keys = Object.keys(item);
+    const string = keys.reduce((acc, key) => [...acc, `${indentation(step + 3)}${key}: ${item[key]}`], []).join('\n');
     return `{\n${string}\n${indentation(step + 1)}}`;
   };
   const getValue = value => (value instanceof Object ? stringify(value) : value);
@@ -20,7 +20,7 @@ const getString = (ast, step = 1) => {
       return [`${indentation(step)}- ${prop}: ${before}`, `${indentation(step)}+ ${prop}: ${after}`];
     },
   };
-  const string = ast.reduce((acc, node) => [...acc, typeActions[node.type](node)], []);
+  const string = ast.map(node => typeActions[node.type](node));
   return flatten(string).join('\n');
 };
 export default ast => `{\n${getString(ast)}\n}`;

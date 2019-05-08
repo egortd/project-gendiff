@@ -1,46 +1,15 @@
-// import fs from 'fs';
+import fs from 'fs';
 import gendiff from '../src';
 
 const directory = '__tests__/__fixtures__/';
-const expected = `{
-    common: {
-        setting1: Value 1
-      - setting2: 200
-      - setting3: true
-      + setting3: {
-            key: value
-        }
-        setting6: {
-            key: value
-          + ops: vops
-        }
-      + follow: false
-      + setting4: blah blah
-      + setting5: {
-            key5: value5
-        }
-    }
-    group1: {
-      - baz: bas
-      + baz: bars
-        foo: bar
-      - nest: {
-            key: value
-        }
-      + nest: str
-    }
-  - group2: {
-        abc: 12345
-    }
-  + group3: {
-        fee: 100500
-    }
-}`;
-// const expected = fs.readFileSync(`${directory}/diff.txt`, 'utf-8');
 const extensions = ['.json', '.yml', '.ini'];
-extensions.forEach((ext) => {
-  test(`Checking ${ext} files`, () => {
-    const received = gendiff(`${directory}before${ext}`, `${directory}after${ext}`);
-    expect(received).toBe(expected);
-  });
+const formats = ['tree', 'plain'];
+formats.forEach((f) => {
+  describe(`\n${f} format:`, () => extensions.forEach((ext) => {
+    test(`Checking ${ext} files`, () => {
+      const expected = fs.readFileSync(`${directory}${f}Result`, 'utf-8');
+      const received = gendiff(`${directory}before${ext}`, `${directory}after${ext}`, `${f}`);
+      expect(received).toBe(expected);
+    });
+  }));
 });
