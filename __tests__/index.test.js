@@ -1,32 +1,46 @@
+// import fs from 'fs';
 import gendiff from '../src';
 
-describe('flat', () => {
-  const expected = `{
-    host: hexlet.io
-  + timeout: 20
-  - timeout: 50
-  - proxy: 123.234.53.22
-  - follow: false
-  + verbose: true
+const directory = '__tests__/__fixtures__';
+const expected = `{
+    common: {
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: {
+            key: value
+        }
+        setting6: {
+            key: value
+          + ops: vops
+        }
+      + follow: false
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+    }
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
+    }
+  - group2: {
+        abc: 12345
+    }
+  + group3: {
+        fee: 100500
+    }
 }`;
-  test('JSON', () => {
-    const before = '__tests__/__fixtures__/before.json';
-    const after = '__tests__/__fixtures__/after.json';
-    const received = gendiff(before, after);
-    // const pathToExpected = '__tests__/__fixtures__/diff.txt';
-    // const expected = fs.readFileSync(pathToExpected, 'utf-8');
-    expect(received).toBe(expected);
-  });
-  test('YAML', () => {
-    const before = '__tests__/__fixtures__/before.yml';
-    const after = '__tests__/__fixtures__/after.yml';
-    const received = gendiff(before, after);
-    expect(received).toBe(expected);
-  });
-  test('INI', () => {
-    const before = '__tests__/__fixtures__/before.ini';
-    const after = '__tests__/__fixtures__/after.ini';
-    const received = gendiff(before, after);
+// const expected = fs.readFileSync(`${directory}/diff.txt`, 'utf-8').toString();
+const extensions = ['.json', '.yml', '.ini'];
+extensions.forEach((ext) => {
+  test(`Checking ${ext} files`, () => {
+    const received = gendiff(`${directory}/before${ext}`, `${directory}/after${ext}`);
     expect(received).toBe(expected);
   });
 });
