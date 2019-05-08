@@ -10,7 +10,7 @@ export default commander
   .arguments('<firstConfig>')
   .arguments('<secondConfig>')
   .option('-f, --format [type]', 'Output format', 'tree')
-  .action((firstConfig, secondConfig, options) => {
-    console.log(gendiff(firstConfig, secondConfig, options.format));
+  .action((firstConfig, secondConfig) => {
+    console.log(gendiff(firstConfig, secondConfig, commander.format));
   })
   .parse(process.argv);
