@@ -24,9 +24,8 @@ const getAst = (first, second) => {
       }),
     },
   ];
-  const getPropertyAction = prop => propertyAction.find(({ check }) => check(prop));
   return [...properties].map((prop) => {
-    const { makeNode } = getPropertyAction(prop);
+    const { makeNode } = propertyAction.find(({ check }) => check(prop));
     return makeNode(prop);
   });
 };
