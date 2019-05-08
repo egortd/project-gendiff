@@ -1,7 +1,7 @@
 // import fs from 'fs';
 import gendiff from '../src';
 
-const directory = '__tests__/__fixtures__';
+const directory = '__tests__/__fixtures__/';
 const expected = `{
     common: {
         setting1: Value 1
@@ -36,11 +36,11 @@ const expected = `{
         fee: 100500
     }
 }`;
-// const expected = fs.readFileSync(`${directory}/diff.txt`, 'utf-8').toString();
+// const expected = fs.readFileSync(`${directory}/diff.txt`, 'utf-8');
 const extensions = ['.json', '.yml', '.ini'];
 extensions.forEach((ext) => {
   test(`Checking ${ext} files`, () => {
-    const received = gendiff(`${directory}/before${ext}`, `${directory}/after${ext}`);
+    const received = gendiff(`${directory}before${ext}`, `${directory}after${ext}`);
     expect(received).toBe(expected);
   });
 });

@@ -1,6 +1,5 @@
 const getAst = (first, second) => {
   const properties = new Set([...Object.keys(first), ...Object.keys(second)]);
-
   const propertyAction = [
     {
       check: prop => first[prop] instanceof Object && second[prop] instanceof Object,
