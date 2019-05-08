@@ -6,12 +6,12 @@ const getAst = (first, second) => {
       makeNode: prop => ({ type: 'children', prop, children: getAst(first[prop], second[prop]) }),
     },
     {
-      check: prop => first[prop] === second[prop],
-      makeNode: prop => ({ type: 'unchanged', prop, valueAfter: second[prop] }),
-    },
-    {
       check: prop => !first[prop],
       makeNode: prop => ({ type: 'added', prop, valueAfter: second[prop] }),
+    },
+    {
+      check: prop => first[prop] === second[prop],
+      makeNode: prop => ({ type: 'unchanged', prop, valueAfter: second[prop] }),
     },
     {
       check: prop => !second[prop],

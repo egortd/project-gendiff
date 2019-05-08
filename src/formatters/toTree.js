@@ -11,9 +11,9 @@ const getString = (ast, step = 1) => {
 
   const typeActions = {
     children: ({ prop, children }) => `${indentation(step + 1)}${prop}: ${'{\n'}${getString(children, step + 2)}\n${indentation(step + 1)}}`,
-    unchanged: ({ prop, valueAfter }) => `${indentation(step + 1)}${prop}: ${getValue(valueAfter)}`,
     added: ({ prop, valueAfter }) => `${indentation(step)}+ ${prop}: ${getValue(valueAfter)}`,
-    deleted: ({ prop, valueBefore }) => `${indentation(step)}- ${prop}: ${getValue(valueBefore)}`,
+    unchanged: ({ prop, valueAfter }) => `${indentation(step + 1)}${prop}: ${getValue(valueAfter)}`,
+    removed: ({ prop, valueBefore }) => `${indentation(step)}- ${prop}: ${getValue(valueBefore)}`,
     changed: ({ prop, valueBefore, valueAfter }) => {
       const before = getValue(valueBefore);
       const after = getValue(valueAfter);
