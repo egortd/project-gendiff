@@ -5,8 +5,17 @@
 
 ## Description
 
-The utility finds differences in configuration files.
+The utility finds and shows differences in configuration files. 
+Works with .json, .yml, .ini files.
+Three formats of output are available: 'tree' as default, 'plain' and 'json'.
 
 ### Install
 
-`npm i -g gendiff-edu`
+`$ npm i -g gendiff-edu`
+
+### Usage
+
+`$ gendiff [options] <firstConfig> <secondConfig>`
+
+### Tree:
+[![asciicast](https://asciinema.org/a/s1eBlUZPUmIsRbHrT2a5m0yKE.svg)](https://asciinema.org/a/s1eBlUZPUmIsRbHrT2a5m0yKE)

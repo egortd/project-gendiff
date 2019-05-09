@@ -1,11 +1,11 @@
 import { flatten, isEmpty } from 'lodash';
 
-const getPlain = (ast, pathCall) => {
+const getString = (ast, pathCall) => {
   const getStringValue = item => (item instanceof Object ? '[complex value]' : `value '${item}'`);
   const typeActions = {
-    children: ({ children }, chain) => getPlain(children, chain),
-    added: ({ valueAfter }, chain) => `Property '${chain}' was added with ${getStringValue(valueAfter)}`,
+    children: ({ children }, chain) => getString(children, chain),
     unchanged: () => '',
+    added: ({ valueAfter }, chain) => `Property '${chain}' was added with ${getStringValue(valueAfter)}`,
     removed: (node, chain) => `Property '${chain}' was removed`,
     changed: ({ valueBefore, valueAfter }, chain) => {
       const firstValue = getStringValue(valueBefore);
@@ -19,4 +19,4 @@ const getPlain = (ast, pathCall) => {
   });
   return flatten(result).filter(x => !(isEmpty(x))).join('\n');
 };
-export default ast => getPlain(ast);
+export default ast => getString(ast);
