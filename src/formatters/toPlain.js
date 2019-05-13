@@ -1,9 +1,9 @@
 import { flatten, isEmpty } from 'lodash';
 
-const getString = (ast, pathCall) => {
+const getText = (ast, pathCall) => {
   const getStringValue = item => (item instanceof Object ? '[complex value]' : `value '${item}'`);
   const typeActions = {
-    children: ({ children }, chain) => getString(children, chain),
+    children: ({ children }, chain) => getText(children, chain),
     unchanged: () => '',
     added: ({ valueAfter }, chain) => `Property '${chain}' was added with ${getStringValue(valueAfter)}`,
     removed: (node, chain) => `Property '${chain}' was removed`,
@@ -19,4 +19,4 @@ const getString = (ast, pathCall) => {
   });
   return flatten(result).filter(x => !(isEmpty(x))).join('\n');
 };
-export default ast => getString(ast);
+export default ast => getText(ast);

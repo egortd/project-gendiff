@@ -1,10 +1,20 @@
-import parse from './parsers';
+import path from 'path';
+import fs from 'fs';
+import getParser from './parsers';
 import buildAst from './buildAst';
-import render from './formatters';
+import getRender from './formatters';
 
-export default (firstConfig, secondConfig, format) => {
-  const first = parse(firstConfig);
-  const second = parse(secondConfig);
-  const ast = buildAst(first, second);
-  return render(format)(ast);
+const getExtension = filePath => path.extname(filePath);
+
+const getParsedConfig = (configPath) => {
+  const extension = getExtension(configPath);
+  const parse = getParser(extension);
+  return parse(fs.readFileSync(configPath, 'utf-8'));
+};
+
+export default (firstConfigPath, secondConfigPath, format) => {
+  const firstParsedConfig = getParsedConfig(firstConfigPath);
+  const secondParsedConfig = getParsedConfig(secondConfigPath);
+  const render = getRender(format);
+  return render(buildAst(firstParsedConfig, secondParsedConfig));
 };

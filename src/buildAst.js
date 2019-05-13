@@ -1,5 +1,7 @@
+import { union } from 'lodash';
+
 const getAst = (first, second) => {
-  const properties = [...new Set([...Object.keys(first), ...Object.keys(second)])];
+  const properties = union(Object.keys(first), Object.keys(second));
   const propertyActions = [
     {
       check: prop => first[prop] instanceof Object && second[prop] instanceof Object,
