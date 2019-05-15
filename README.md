@@ -1,6 +1,6 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/bb419ba5c402f799bf88/maintainability)](https://codeclimate.com/github/egortd/project-lvl2-s463/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/3b82bd2469084d7ced75/maintainability)](https://codeclimate.com/github/egortd/project-gendiff/maintainability)
 [![Build Status](https://travis-ci.org/egortd/project-gendiff.svg?branch=master)](https://travis-ci.org/egortd/project-gendiff)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/bb419ba5c402f799bf88/test_coverage)](https://codeclimate.com/github/egortd/project-lvl2-s463/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/3b82bd2469084d7ced75/test_coverage)](https://codeclimate.com/github/egortd/project-gendiff/test_coverage)
 
 
 ## Description
