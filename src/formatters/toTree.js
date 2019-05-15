@@ -2,12 +2,12 @@ import { flatten } from 'lodash';
 
 const indentation = v => ' '.repeat(2 * v);
 const getValue = (item, step) => {
-  if (item instanceof Object) {
-    const keys = Object.keys(item);
-    const text = keys.reduce((acc, key) => [...acc, `${indentation(step + 3)}${key}: ${item[key]}`], []).join('\n');
-    return `{\n${text}\n${indentation(step + 1)}}`;
+  if (!(item instanceof Object)) {
+    return item;
   }
-  return item;
+  const keys = Object.keys(item);
+  const text = keys.reduce((acc, key) => [...acc, `${indentation(step + 3)}${key}: ${item[key]}`], []).join('\n');
+  return `{\n${text}\n${indentation(step + 1)}}`;
 };
 
 const getText = (ast, step = 1) => {
