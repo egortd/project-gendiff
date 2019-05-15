@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/egortd/project-gendiff.svg?branch=master)](https://travis-ci.org/egortd/project-gendiff)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3b82bd2469084d7ced75/test_coverage)](https://codeclimate.com/github/egortd/project-gendiff/test_coverage)
 
-
 ## Description
 
 - The utility finds and shows differences in configuration files. 
